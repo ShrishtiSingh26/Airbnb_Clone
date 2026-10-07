@@ -52,6 +52,18 @@ Open `http://localhost:3000`. By default, the frontend calls `http://127.0.0.1:8
 NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api
 ```
 
+## Deploy to Vercel
+
+Vercel deploys the Next.js frontend; the FastAPI backend must also be deployed to a Python-capable host. If only the frontend is deployed, features that call the API (accounts, listings, bookings, and wishlists) will not work.
+
+1. In Vercel, set the project Root Directory to `frontend`, keep the build command as `npm run build`, and set the Output Directory to the default.
+2. Deploy the FastAPI app separately from the `backend` directory with the start command `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
+3. Set `NEXT_PUBLIC_API_URL` in Vercel to the public backend URL ending in `/api`, for example `https://your-api.example.com/api`. Set it for each Vercel environment you use, then redeploy.
+4. Set `FRONTEND_ORIGINS` on the backend host to the exact frontend origin, for example `https://your-project.vercel.app`. For multiple origins, separate them with commas. Include your production custom domain and any Vercel preview domains you need.
+5. Ensure the backend host uses persistent storage for the SQLite database. The default database file is local to the backend deployment and can be lost on hosts with ephemeral filesystems.
+
+The `npm warn deprecated` messages during installation concern transitive packages and are warnings, not build failures. The `unrs-resolver` install-script notice is also separate from the API configuration; check the Vercel Build Logs for the actual `Build Completed` or error status if deployment still fails.
+
 ## Main flows
 
 - Browse image-led stay cards, filter by destination, dates, guests, price, property type, bedrooms, beds, and amenities, and paginate the result list.

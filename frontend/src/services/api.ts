@@ -2,7 +2,12 @@ import { Booking, Listing, Review, User, SearchFilters, Wishlist } from '@/types
 
 const getApiBaseUrl = () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
+    return process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/+$/, '');
+  }
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'The API is not configured. Set NEXT_PUBLIC_API_URL to the deployed backend URL ending in /api, then redeploy the frontend.',
+    );
   }
   if (typeof window !== 'undefined' && window.location.hostname) {
     return `http://${window.location.hostname}:8000/api`;

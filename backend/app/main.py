@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import ensure_schema
@@ -44,6 +46,11 @@ app.add_middleware(
         "http://127.0.0.1:3001",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
+        *[
+            origin.strip().rstrip("/")
+            for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
+            if origin.strip()
+        ],
     ],
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
