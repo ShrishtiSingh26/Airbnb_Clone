@@ -106,11 +106,29 @@ export default function ListingDetailPage() {
   // Modals & Expanders
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [showAllAmenitiesModal, setShowAllAmenitiesModal] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [newRating, setNewRating] = useState(5);
   const [newComment, setNewComment] = useState('');
+
+  const handleShareClick = async () => {
+    const shareData = {
+      title: listing?.title || 'Airbnb Stay',
+      text: `Check out this stay: ${listing?.title} in ${listing?.city}, ${listing?.country}`,
+      url: typeof window !== 'undefined' ? window.location.href : '',
+    };
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        setIsShareModalOpen(true);
+      }
+    } else {
+      setIsShareModalOpen(true);
+    }
+  };
 
   // Calendar month state
   const [calendarYear, setCalendarYear] = useState(2026);
@@ -445,7 +463,10 @@ export default function ListingDetailPage() {
           </div>
 
           <div className="flex items-center gap-4 text-xs font-bold text-gray-900">
-            <button className="flex items-center gap-1.5 hover:bg-gray-100 py-1.5 px-3 rounded-lg transition">
+            <button
+              onClick={handleShareClick}
+              className="flex items-center gap-1.5 hover:bg-gray-100 py-1.5 px-3 rounded-lg transition"
+            >
               <Share2 size={15} /> <span className="underline">Share</span>
             </button>
             <button
@@ -1183,6 +1204,86 @@ export default function ListingDetailPage() {
                 <img key={i} src={getListingImageUrl(src, 1400)} onError={useImageFallback} alt={`Photo ${i + 1}`} className="w-full rounded-2xl object-cover max-h-[80vh] mx-auto shadow-2xl" />
               ))}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Responsive Share Modal */}
+      {isShareModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs p-0 sm:p-4 animate-in fade-in">
+          <div className="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl p-6 space-y-6 border border-gray-100 max-h-[90vh] overflow-y-auto">
+            
+            <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+              <h3 className="text-lg font-bold text-gray-900">Share this stay</h3>
+              <button onClick={() => setIsShareModalOpen(false)} aria-label="Close share options"><X size={18} /></button>
+            </div>
+
+            {/* Listing Preview Card */}
+            <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-2xl border border-gray-200">
+              <img
+                src={getListingImageUrl(photos[0], 400)}
+                alt={listing.title}
+                onError={useImageFallback}
+                className="w-16 h-16 rounded-xl object-cover shrink-0"
+              />
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-bold text-gray-900 truncate">{listing.title}</p>
+                <p className="text-[11px] text-gray-500 truncate">{listing.property_type} in {listing.city}, {listing.country}</p>
+                <p className="text-[11px] text-gray-600 font-semibold mt-0.5">★ {ratingVal.toFixed(2)} · {reviewCount} reviews</p>
+              </div>
+            </div>
+
+            {/* Share Options Grid */}
+            <div className="grid grid-cols-2 gap-3 text-xs font-semibold">
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                  toast.success('Link copied to clipboard!');
+                  setIsShareModalOpen(false);
+                }}
+                className="flex items-center gap-3 p-3.5 rounded-2xl border border-gray-200 hover:bg-gray-50 transition text-left"
+              >
+                <div className="p-2 rounded-xl bg-gray-100 text-gray-900">
+                  <Share2 size={16} />
+                </div>
+                <span>Copy link</span>
+              </button>
+
+              <a
+                href={`mailto:?subject=${encodeURIComponent(listing.title)}&body=${encodeURIComponent(`Check out this stay on Airbnb: ${window.location.href}`)}`}
+                className="flex items-center gap-3 p-3.5 rounded-2xl border border-gray-200 hover:bg-gray-50 transition text-left"
+              >
+                <div className="p-2 rounded-xl bg-rose-50 text-rose-600">
+                  <MessageSquare size={16} />
+                </div>
+                <span>Email</span>
+              </a>
+
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(`Check out ${listing.title}: ${window.location.href}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3.5 rounded-2xl border border-gray-200 hover:bg-gray-50 transition text-left"
+              >
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600">
+                  <Check size={16} />
+                </div>
+                <span>WhatsApp</span>
+              </a>
+
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${listing.title}`)}&url=${encodeURIComponent(window.location.href)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3.5 rounded-2xl border border-gray-200 hover:bg-gray-50 transition text-left"
+              >
+                <div className="p-2 rounded-xl bg-sky-50 text-sky-600">
+                  <Sparkles size={16} />
+                </div>
+                <span>Twitter / X</span>
+              </a>
+            </div>
+
           </div>
         </div>
       )}
