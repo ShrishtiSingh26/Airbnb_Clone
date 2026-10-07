@@ -1,16 +1,17 @@
 import { Booking, Listing, Review, User, SearchFilters, Wishlist } from '@/types';
 
 const getApiBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/+$/, '');
-  }
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error(
-      'The API is not configured. Set NEXT_PUBLIC_API_URL to the deployed backend URL ending in /api, then redeploy the frontend.',
-    );
+  let envUrl = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/+$/, '') : '';
+  if (envUrl) {
+    if (!envUrl.endsWith('/api')) {
+      envUrl = `${envUrl}/api`;
+    }
+    return envUrl;
   }
   if (typeof window !== 'undefined' && window.location.hostname) {
-    return `http://${window.location.hostname}:8000/api`;
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return `http://${window.location.hostname}:8000/api`;
+    }
   }
   return 'http://127.0.0.1:8000/api';
 };
