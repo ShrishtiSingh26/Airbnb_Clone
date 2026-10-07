@@ -1,6 +1,21 @@
 # Airbnb-style Stays Marketplace
 
 A responsive Airbnb-inspired stays marketplace built for the Airbnb Web App SDE assignment. It uses Next.js 14 with TypeScript and Tailwind CSS, a FastAPI backend, SQLAlchemy, and SQLite. It includes hashed-password accounts, seeded demo accounts, and a local demo payment flow.
+<img width="1917" height="910" alt="image" src="https://github.com/user-attachments/assets/8eaa5cb7-0f1e-4635-b316-b9463e4368f8" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7ed3fe8b-2415-4470-98a3-04bf9c4c7bef" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/49cfb784-18ba-4c7e-b057-8f211e2c36ae" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/acfa391b-2ed1-429e-8280-53432393498d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7890d441-fab6-4330-b646-1f34ebca3381" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/27f2bdb3-66c2-4d36-a54c-1c4df0e7c760" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3dabf090-3447-41aa-ba85-cc159ebe983b" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cf50ab0a-91fa-487f-b220-7bb9ed3b637d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/17d7b70d-bbb3-431e-9b08-7a3bcde545f3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5f063e12-8646-451a-a335-f8a84b46e9ae" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ff646c68-7456-4aeb-9091-456204ade479" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/82fedf45-afe8-43e7-98e4-f9c70b4b027d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2093e0d7-2393-4711-9e55-2dc92db6feab" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d1087ae0-1a72-4ef2-bab8-81128137eb85" />
+
 
 ## Run locally
 
