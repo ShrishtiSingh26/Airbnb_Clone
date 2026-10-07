@@ -510,7 +510,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, currentUser, onApp
             </button>
 
             <Link
-              href="/host"
+              href={currentUser ? '/host' : '/register?role=host&next=%2Fhost'}
               className="hidden sm:inline-flex text-xs font-bold text-gray-900 dark:text-gray-100 py-2.5 px-4 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
             >
               Become a host
@@ -645,22 +645,74 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, currentUser, onApp
                     </button>
                   </div>
 
+                  {currentUser ? (
+                    <div className="border-b border-gray-100 p-4 dark:border-gray-800">
+                      <p className="text-[11px] font-normal text-gray-500 dark:text-gray-400">
+                        Signed in as {currentUser.is_host ? 'Host' : 'Guest'}
+                      </p>
+                      {currentUser.is_host ? (
+                        <Link
+                          href="/host"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="mt-2 block rounded-xl px-3 py-2 font-bold text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                        >
+                          Host dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/host"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="mt-2 block rounded-xl px-3 py-2 font-bold text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                        >
+                          Become a host
+                        </Link>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="space-y-3 border-b border-gray-100 p-4 dark:border-gray-800">
+                      <div>
+                        <p className="mb-1 px-2 text-[11px] font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Guest</p>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Link
+                            href="/login?next=%2F"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="rounded-xl border border-gray-200 px-3 py-2 text-center font-bold hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+                          >
+                            Log in
+                          </Link>
+                          <Link
+                            href="/register?role=guest&next=%2F"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="rounded-xl bg-airbnb px-3 py-2 text-center font-bold text-white hover:bg-airbnb-dark"
+                          >
+                            Sign up
+                          </Link>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="mb-1 px-2 text-[11px] font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Host</p>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Link
+                            href="/login?next=%2Fhost"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="rounded-xl border border-gray-200 px-3 py-2 text-center font-bold hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+                          >
+                            Log in
+                          </Link>
+                          <Link
+                            href="/register?role=host&next=%2Fhost"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="rounded-xl bg-airbnb px-3 py-2 text-center font-bold text-white hover:bg-airbnb-dark"
+                          >
+                            Sign up
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Become a Host Card Promo */}
                   <div className="p-3 border-b border-gray-100 dark:border-gray-800">
-                    <Link
-                      href="/host"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-2xl transition border border-gray-100 dark:border-gray-700"
-                    >
-                      <div>
-                        <p className="font-bold text-gray-900 dark:text-gray-100 text-xs">Become a host</p>
-                        <p className="text-[11px] text-gray-500 dark:text-gray-400 font-normal leading-tight mt-0.5">
-                          It's easy to start hosting and earn extra income.
-                        </p>
-                      </div>
-                      <span className="text-xl pl-2">🏡</span>
-                    </Link>
-
                     <Link
                       href="/referrals"
                       onClick={() => setIsMenuOpen(false)}
@@ -687,24 +739,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, currentUser, onApp
                       >
                         Log out
                       </button>
-                    ) : (
-                      <div className="space-y-1">
-                        <Link
-                          href="/login"
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block px-3 py-2 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold rounded-xl"
-                        >
-                          Log in
-                        </Link>
-                        <Link
-                          href="/register"
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block px-3 py-2 text-[#E81948] hover:bg-rose-50 dark:hover:bg-rose-950 font-bold rounded-xl"
-                        >
-                          Sign up
-                        </Link>
-                      </div>
-                    )}
+                    ) : null}
                   </div>
 
                 </div>

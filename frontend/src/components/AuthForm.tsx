@@ -17,8 +17,10 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
   const isRegister = mode === 'register';
 
   useEffect(() => {
-    const next = new URLSearchParams(window.location.search).get('next') || '';
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get('next') || '';
     if (next.startsWith('/') && !next.startsWith('//')) setNextPath(next);
+    if (params.get('role') === 'host') setRole('host');
   }, []);
 
   async function submit(event: FormEvent) {

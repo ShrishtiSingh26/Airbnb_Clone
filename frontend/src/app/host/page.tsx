@@ -242,7 +242,7 @@ export default function HostDashboardPage() {
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 text-airbnb"><Home size={26} /></div>
           <h1 className="text-2xl font-bold text-gray-900">Your host dashboard</h1>
           <p className="mt-2 text-sm leading-6 text-gray-600">{account ? 'Switch your account to host mode to publish stays and manage reservations.' : 'Log in to your own account or create one to manage stays as a host.'}</p>
-          {account ? <button onClick={becomeHost} className="mt-6 rounded-xl bg-airbnb px-5 py-3 text-sm font-semibold text-white hover:bg-airbnb-dark">Become a host</button> : <div className="mt-6 flex gap-3"><Link href="/login?next=/host" className="rounded-xl bg-airbnb px-5 py-3 text-sm font-semibold text-white">Log in</Link><Link href="/register?next=/host" className="rounded-xl border border-gray-300 px-5 py-3 text-sm font-semibold">Create account</Link></div>}
+          {account ? <button onClick={becomeHost} className="mt-6 rounded-xl bg-airbnb px-5 py-3 text-sm font-semibold text-white hover:bg-airbnb-dark">Become a host</button> : <div className="mt-6 flex gap-3"><Link href="/login?next=%2Fhost" className="rounded-xl bg-airbnb px-5 py-3 text-sm font-semibold text-white">Log in</Link><Link href="/register?role=host&next=%2Fhost" className="rounded-xl border border-gray-300 px-5 py-3 text-sm font-semibold">Create host account</Link></div>}
           <Link href="/" className="mt-6 inline-flex text-sm font-semibold text-gray-700 underline">Return to stays</Link>
         </section>
       </main>

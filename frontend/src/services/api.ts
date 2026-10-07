@@ -13,7 +13,7 @@ const getApiBaseUrl = () => {
 export const getCurrentUserId = (): number | null => {
   if (typeof window === 'undefined') return null;
   const id = Number(window.localStorage.getItem('airbnb-user-id'));
-  return Number.isInteger(id) && id > 0 ? id : 1;
+  return Number.isInteger(id) && id > 0 ? id : null;
 };
 
 // Fallback Mock Listing for Seamless Offline / Connection Error handling
@@ -142,25 +142,13 @@ const normalizeBooking = (b: any): Booking => ({ ...b, user_id: b.guest_id, list
 
 export const api = {
   register: async (data: {name: string; email: string; password: string; role?: 'guest' | 'host'}) => {
-    try {
-      return normalizeUser(await fetchJson<any>('/auth/register', { method: 'POST', body: JSON.stringify({ ...data, name: data.name.trim(), email: data.email.trim().toLowerCase() }) }));
-    } catch {
-      return { id: 1, name: data.name, email: data.email, is_host: data.role === 'host', is_superhost: false };
-    }
+    return normalizeUser(await fetchJson<any>('/auth/register', { method: 'POST', body: JSON.stringify({ ...data, name: data.name.trim(), email: data.email.trim().toLowerCase() }) }));
   },
   login: async (data: {email: string; password: string}) => {
-    try {
-      return normalizeUser(await fetchJson<any>('/auth/login', { method: 'POST', body: JSON.stringify(data) }));
-    } catch {
-      return { id: 1, name: 'Shrishti Singh', email: data.email, is_host: false, is_superhost: false };
-    }
+    return normalizeUser(await fetchJson<any>('/auth/login', { method: 'POST', body: JSON.stringify(data) }));
   },
   becomeHost: async (userId: number) => {
-    try {
-      return normalizeUser(await fetchJson<any>(`/auth/become-host/${userId}`, { method: 'POST' }));
-    } catch {
-      return { id: userId, name: 'Shrishti Singh', email: 'shrishti@example.com', is_host: true, is_superhost: false };
-    }
+    return normalizeUser(await fetchJson<any>(`/auth/become-host/${userId}`, { method: 'POST' }));
   },
   createDemoCheckout: async (data: {listing_id: number; guest_id: number; check_in: string; check_out: string; guests: number; payment_method: string}) => {
     try {
