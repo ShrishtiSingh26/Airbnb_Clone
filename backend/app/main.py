@@ -22,8 +22,14 @@ from app.routers import (
 )
 
 
+from app.seed import seed_database
+
 ensure_schema()
 auth.ensure_demo_accounts()
+try:
+    seed_database()
+except Exception as e:
+    print(f"Auto-seed notification: {e}")
 
 
 app = FastAPI(

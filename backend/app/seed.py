@@ -22,14 +22,9 @@ def seed_database():
 
     try:
 
-        has_existing_data = any((
-            db.query(User).count(),
-            db.query(Listing).count(),
-            db.query(Booking).count(),
-            db.query(Wishlist).count(),
-        ))
-        if has_existing_data and os.getenv("AIRBNB_RESET_DATABASE") != "1":
-            print("Existing Airbnb data found; seeding was skipped to protect it.")
+        has_listings = db.query(Listing).count() > 0
+        if has_listings and os.getenv("AIRBNB_RESET_DATABASE") != "1":
+            print("Existing Airbnb listings found; seeding was skipped to protect them.")
             print("Set AIRBNB_RESET_DATABASE=1 only when you intentionally want to replace the database with demo data.")
             return
 

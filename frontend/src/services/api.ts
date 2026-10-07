@@ -22,7 +22,7 @@ export const getCurrentUserId = (): number | null => {
   return Number.isInteger(id) && id > 0 ? id : null;
 };
 
-// Fallback Mock Listing for Seamless Offline / Connection Error handling
+// Fallback Mock Listings for Seamless Offline / Connection Error handling
 const FALLBACK_LISTING: Listing = {
   id: 10,
   host_id: 1,
@@ -36,7 +36,7 @@ const FALLBACK_LISTING: Listing = {
   allows_pets: false,
   is_guest_favourite: true,
   is_luxe: false,
-  location: 'Bandram, Mumbai, India',
+  location: 'Bandra, Mumbai, India',
   city: 'Mumbai',
   country: 'India',
   latitude: 19.076,
@@ -78,6 +78,147 @@ const FALLBACK_LISTING: Listing = {
     is_superhost: true,
   }
 };
+
+const FALLBACK_LISTINGS: Listing[] = [
+  FALLBACK_LISTING,
+  {
+    id: 1,
+    host_id: 1,
+    title: 'Luxury Villa with Private Pool in North Goa',
+    description: 'Spacious 4-bedroom villa with private swimming pool, tropical garden, and ocean views in Candolim.',
+    category: 'Villa',
+    property_type: 'Entire villa',
+    room_type: 'Entire place',
+    instant_book: true,
+    self_check_in: true,
+    allows_pets: true,
+    is_guest_favourite: true,
+    is_luxe: true,
+    location: 'Candolim, North Goa, India',
+    city: 'Goa',
+    country: 'India',
+    latitude: 15.5177,
+    longitude: 73.7626,
+    price_per_night: 18500,
+    cleaning_fee: 1200,
+    service_fee: 1800,
+    max_guests: 8,
+    bedrooms: 4,
+    beds: 4,
+    bathrooms: 4,
+    images: [
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80',
+    ],
+    amenities: ['Pool', 'Wifi', 'Kitchen', 'Air conditioning', 'Free parking'],
+    rating: 4.95,
+    review_count: 142,
+    host: { id: 1, name: 'Aarav Sharma', email: 'aarav@example.com', avatar: 'https://i.pravatar.cc/150?img=12', is_host: true, is_superhost: true },
+  },
+  {
+    id: 2,
+    host_id: 2,
+    title: 'Modern Penthouse near India Gate with Terrace View',
+    description: 'Stunning penthouse in central New Delhi with panoramic skyline views.',
+    category: 'Penthouse',
+    property_type: 'Entire penthouse',
+    room_type: 'Entire place',
+    instant_book: true,
+    self_check_in: true,
+    allows_pets: false,
+    is_guest_favourite: true,
+    is_luxe: false,
+    location: 'Connaught Place, New Delhi, India',
+    city: 'Delhi',
+    country: 'India',
+    latitude: 28.6139,
+    longitude: 77.209,
+    price_per_night: 12400,
+    cleaning_fee: 800,
+    service_fee: 1200,
+    max_guests: 4,
+    bedrooms: 2,
+    beds: 2,
+    bathrooms: 2,
+    images: [
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
+    ],
+    amenities: ['Wifi', 'Kitchen', 'Air conditioning', 'Lift', 'Workspace'],
+    rating: 4.88,
+    review_count: 78,
+    host: { id: 2, name: 'Meera Kapoor', email: 'meera@example.com', avatar: 'https://i.pravatar.cc/150?img=47', is_host: true, is_superhost: false },
+  },
+  {
+    id: 3,
+    host_id: 3,
+    title: 'Cozy Mountain Wooden Chalet with Snow Views',
+    description: 'Rustic wooden cabin surrounded by pine trees and snow peaks in Old Manali.',
+    category: 'Cabin',
+    property_type: 'Entire chalet',
+    room_type: 'Entire place',
+    instant_book: false,
+    self_check_in: true,
+    allows_pets: true,
+    is_guest_favourite: true,
+    is_luxe: false,
+    location: 'Old Manali, Himachal Pradesh, India',
+    city: 'Manali',
+    country: 'India',
+    latitude: 32.2432,
+    longitude: 77.1892,
+    price_per_night: 6500,
+    cleaning_fee: 500,
+    service_fee: 650,
+    max_guests: 4,
+    bedrooms: 2,
+    beds: 2,
+    bathrooms: 1,
+    images: [
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80',
+    ],
+    amenities: ['Fireplace', 'Wifi', 'Kitchen', 'Free parking'],
+    rating: 4.92,
+    review_count: 110,
+    host: { id: 3, name: 'Rohan Verma', email: 'rohan@example.com', avatar: 'https://i.pravatar.cc/150?img=33', is_host: true, is_superhost: true },
+  },
+  {
+    id: 4,
+    host_id: 1,
+    title: 'Heritage Royal Suite in Pink City Palace',
+    description: 'Authentic Rajasthani architecture with courtyards and marble floors in Jaipur.',
+    category: 'Heritage',
+    property_type: 'Heritage stay',
+    room_type: 'Entire place',
+    instant_book: true,
+    self_check_in: false,
+    allows_pets: false,
+    is_guest_favourite: true,
+    is_luxe: true,
+    location: 'Jaipur, Rajasthan, India',
+    city: 'Jaipur',
+    country: 'India',
+    latitude: 26.9124,
+    longitude: 75.7873,
+    price_per_night: 14200,
+    cleaning_fee: 900,
+    service_fee: 1400,
+    max_guests: 5,
+    bedrooms: 3,
+    beds: 3,
+    bathrooms: 3,
+    images: [
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+    ],
+    amenities: ['Pool', 'Wifi', 'Breakfast included', 'Air conditioning'],
+    rating: 4.97,
+    review_count: 204,
+    host: { id: 1, name: 'Aarav Sharma', email: 'aarav@example.com', avatar: 'https://i.pravatar.cc/150?img=12', is_host: true, is_superhost: true },
+  }
+];
 
 const FALLBACK_REVIEWS: Review[] = [
   {
@@ -206,9 +347,12 @@ export const api = {
       if (filters.page) params.set('page', String(filters.page));
       params.set('limit', '12');
       const result = await fetchJson<{items: any[]; total: number; page: number; total_pages: number}>(`/listings/?${params}`);
+      if (!result.items || result.items.length === 0) {
+        return { items: FALLBACK_LISTINGS.map(normalizeListing), total: FALLBACK_LISTINGS.length, page: 1, total_pages: 1 };
+      }
       return { ...result, items: result.items.map(normalizeListing) };
     } catch {
-      return { items: [FALLBACK_LISTING], total: 1, page: 1, total_pages: 1 };
+      return { items: FALLBACK_LISTINGS.map(normalizeListing), total: FALLBACK_LISTINGS.length, page: 1, total_pages: 1 };
     }
   },
   getListingById: async (id: number) => {
